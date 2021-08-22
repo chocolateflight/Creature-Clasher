@@ -77,8 +77,8 @@ healthpotion = Potions("Health Potion", +20, 0)
 
 # Creatures #
 
-frostboy = Creature("Frostboy", 80, 100, 43, [frostbite, winterstorm, snowball], [])
-vampthing = Creature("Vampthing", 10, 150, 50, [vampire_bite, moonshock, invisible_attack], [])
-cryptbeast = Creature("Cryptbeast", 50, 80, 80, [electric_shock, hashfryer, market_crash], [])
-glowtree = Creature("Glowtree", 120, 10, 90, [firethrow, chainsaw, falling_apple], [])
-slagtooth = Creature("Slagtooth", 90, 90, 40, [strongbite, monstercrush, fingerflip], [])
+frostboy = Creature("Frostboy", 80, 100, 45, [frostbite, winterstorm, snowball], [staminapotion, staminapotion])
+vampthing = Creature("Vampthing", 10, 150, 50, [vampire_bite, moonshock, invisible_attack], [healthpotion, staminapotion, staminapotion])
+cryptbeast = Creature("Cryptbeast", 50, 80, 80, [electric_shock, hashfryer, market_crash], [healthpotion, healthpotion, staminapotion])
+glowtree = Creature("Glowtree", 120, 10, 90, [firethrow, chainsaw, falling_apple], [healthpotion, healthpotion, staminapotion])
+slagtooth = Creature("Slagtooth", 90, 90, 40, [strongbite, monstercrush, fingerflip], [staminapotion, staminapotion])
