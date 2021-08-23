@@ -142,7 +142,7 @@ def creature_selection(lst):
     
     return character
 
-def print_round_choises():
+def print_round_choices():
     print("""
     Choose an option:
 
@@ -151,22 +151,45 @@ def print_round_choises():
     3 - Skip Round
     
     """)
+optionslist = ["Attacks", "Potions", "Skip Round"]
 
-def round_selection():
+def round_selection(lst, player):
     while True:
 
         try:
             round_option = int(input("Enter number: "))
         except:
-            print("\Please enter a valid number\n")
+            print("\nPlease enter a valid number\n")
             continue
 
-        if (round_option < 1) or (round_option > 3):
+        if (round_option < 1) or (round_option > (len(lst) + 1)):
             print("\nPlease enter a valid number\n")
+            continue
+        elif round_option == 2:
+            if player.potions == []:
+                print("\nNo more potions left. Pick another option.\n")
+                continue
+            else:
+                break
         else:
             break
 
+    return round_option
+
+def move_selection(round_option, character):
+    if round_option == 1:
+        print("Choose an option:\n\n1 - " + str(character.attacks[0]) + "\n2 - " + str(character.attacks[1]) + "\n3 - " + str(character.attacks[2]))
+
+    elif round_option == 2:
+        print("Choose an option:\n\n")
+        i = 0
+        for potion in character.potions:
+            print(str(i + 1) + " - " + str(potion))
+            i += 1
+    
+    elif round_option == 3:
         return round_option
+    
 
 
 print_logo()
@@ -178,7 +201,8 @@ while True:
 
     player = creature_selection(creaturelist)
 
-    print("\nYou choose " + str(player) + " ! Now it's time to pick your opponent.\n")
+    print_line()
+    print("\nYou choose " + str(player) + "! Now it's time to pick your opponent.\n")
     print_pick_creature()
 
     opponent = creature_selection(creaturelist)
@@ -187,7 +211,14 @@ while True:
     while True:
 
         print_line()
-        print("\nLet's go! You go first!\n")
+        print("\nLet's go! It's your turn!\n")
         print(player.summary_player() + "\n")
-        print_round_choises()
-        round_selection = round_selection()
+        print_round_choices()
+        round_selection = round_selection(optionslist, player)
+        move_selection = move_selection(round_selection, player)
+        break
+    break
+
+print_line()
+print(player)
+print(round_selection)
