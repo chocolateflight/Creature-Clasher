@@ -25,6 +25,9 @@ def print_logo():
                                                                    
 """)
 
+def print_line():
+    print(67 * "=")
+
 ###########################################################################
 
 # Classes #
@@ -40,6 +43,13 @@ class Creature:
     
     def __repr__(self):
         return self.name
+    
+    def summary_player(self):
+        return "You have " + str(self.armour) + " Armour points. Your Health is " + str(self.health) + " and you have " + str(self.stamina) + " Stamina."
+    
+    def summary_opponent(self):
+        return "Your opponent has " + str(self.armour) + " Armour points, " + str(self.health) + " Health and " + str(self.stamina) + " Stamina."
+
 
 class Attacks:
     def __init__(self, name, health_effect, stamina_effect):
@@ -132,6 +142,33 @@ def creature_selection(lst):
     
     return character
 
+def print_round_choises():
+    print("""
+    Choose an option:
+
+    1 - Attacks
+    2 - Potions
+    3 - Skip Round
+    
+    """)
+
+def round_selection():
+    while True:
+
+        try:
+            round_option = int(input("Enter number: "))
+        except:
+            print("\Please enter a valid number\n")
+            continue
+
+        if (round_option < 1) or (round_option > 3):
+            print("\nPlease enter a valid number\n")
+        else:
+            break
+
+        return round_option
+
+
 print_logo()
 print("Welcome to Creature Clash!")
 
@@ -145,5 +182,12 @@ while True:
     print_pick_creature()
 
     opponent = creature_selection(creaturelist)
-    print("\nYour opponent is " + str(opponent) + ". Good luck!")
+    print("\nYour opponent is " + str(opponent) + ". Good luck!\n")
 
+    while True:
+
+        print_line()
+        print("\nLet's go! You go first!\n")
+        print(player.summary_player() + "\n")
+        print_round_choises()
+        round_selection = round_selection()
