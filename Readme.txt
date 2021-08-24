@@ -1,3 +1,7 @@
+ --- THIS PROJECT IS WORK IN PROGRESS ---
+ 
+ My first Python based terminal game. This is a training project for me to use the Python knowledge I have aquired so far.
+ 
  ===================================================================
  
  _____                _                    _____ _           _     
@@ -10,4 +14,4 @@
 
  ===================================================================
 
- This is a Readme file. Thanks for reading me. 
+ This is a Readme file. Thanks for reading me.
