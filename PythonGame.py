@@ -14,11 +14,11 @@ while True:
     player = python_game_functions.creature_selection(creaturelist, python_game_functions.user_input) # Allows user to pick a creature for themselves
 
     python_game_functions.print_line()
-    print("\nYou choose " + str(player) + "! Now it's time to pick your opponent.\n")
+    print("You choose " + str(player) + "! Now it's time to pick your opponent.")
     python_game_functions.print_pick_creature()
 
     opponent = python_game_functions.creature_selection(creaturelist, python_game_functions.user_input) # Allows user to pick an opponent creature
-    print("\nYour opponent is " + str(opponent) + ". Good luck!\n")
+    print("\nYour opponent is " + str(opponent) + ". Good luck!")
 
     # python_game_functions.print_line
     # print("--- Ignore this part ---")
@@ -29,17 +29,18 @@ while True:
 
     lostcode = 0
     wincode = 0
-    while lostcode != 808 and wincode != 101:
+    while lostcode != 808 and wincode != 101: # While Loop for player's turn
 
         python_game_functions.print_line()
-        print("\nIt's your turn!\n")
+        print("It's your turn!\n")
         print(player.summary_player() + "\n")
-        python_game_functions.print_round_choices()
 
         available_attacks = []
 
-        while lostcode != 808 and wincode != 101:
+        while lostcode != 808 and wincode != 101: # While Loop for player's choices
+            python_game_functions.print_round_choices()
             round_option = python_game_functions.user_input(python_game_functions.optionslist)
+            python_game_functions.print_line()
 
             if round_option == 1:
 
@@ -56,6 +57,7 @@ while True:
                     print("\n")
                 
                     attack_number = python_game_functions.user_input(available_attacks)
+                    python_game_functions.print_line()
 
                     if attack_number == 1:
                         output = python_game_functions.attack_move(player, opponent, available_attacks, attack_number)
@@ -96,6 +98,7 @@ while True:
                     print("\n")
 
                     potion_number = python_game_functions.user_input(player.potions)
+                    python_game_functions.print_line()
 
                     if potion_number == 1:
                         output = python_game_functions.potion_move(player, player.potions, potion_number)
@@ -114,13 +117,21 @@ while True:
                         break
             
             if round_option == 3:
-                print("Skip turn")
-                break # Add code for skip turn
-            
+                print("Are you sure that you want to skip your turn?\n\n1 - Yes\n2 - No\n")
+                available_choices = ["Yes", "No"]
+                choice = python_game_functions.user_input(available_choices)
+                python_game_functions.print_line()
+
+                if choice == 1:
+                    break
+                if choice == 2:
+                    print("Pick again:")
+                    continue
         break
+    ## ADD CODE FOR OPPONENTS TURN ##
     break
 
-python_game_functions.print_line()
+print("####")
 print(vars(player))
 print(vars(opponent))
-python_game_functions.print_line()
+print("####")
