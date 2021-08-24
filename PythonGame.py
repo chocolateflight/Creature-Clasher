@@ -1,6 +1,6 @@
 # Hello World
 
-from python_game_variables import creaturelist
+from python_game_variables import creaturelist, potionslist
 import python_game_functions
 
  
@@ -26,8 +26,8 @@ while True:
         print("\nLet's go! It's your turn!\n")
         print(player.summary_player() + "\n")
         python_game_functions.print_round_choices()
-        round_selection = python_game_functions.round_selection(python_game_functions.optionslist, player,python_game_functions.user_input)
-        move_selection = python_game_functions.move_selection(round_selection, player, python_game_functions.user_input)
+        round_selection = python_game_functions.round_selection(python_game_functions.optionslist, player,python_game_functions.user_input, potionslist)
+        move_selection = python_game_functions.move_selection(round_selection, player, opponent, python_game_functions.user_input, python_game_functions.attack_move)
         break
     break
 
