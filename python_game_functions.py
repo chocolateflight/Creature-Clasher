@@ -28,8 +28,6 @@ def print_line():
 
 ###########################################################################
 
-# Game #
-
 def print_pick_creature():
     print("""
 Please pick a creature!
@@ -43,20 +41,29 @@ Please pick a creature!
 
 """)
 
-def creature_selection(lst):
+###########################################################################
+
+def user_input(lst):
     while True:
 
         try:
-            character = int(input("Enter number: "))
-        except: 
-            print("\nPlease enter a valid number\n")
+            user_input = int(input("Enter number: "))
+        except:
+            print("\nPlease enter a valid number.\n")
             continue
 
-        if (character < 1) or ((len(lst) + 1) < character):
-            print("\nPlease enter a valid number\n")
+        if (user_input < 1) or (user_input > (len(lst) + 1)):
+            print("\nPlease enter a valid number.\n")
             continue
         else:
             break
+
+    return user_input
+
+###########################################################################
+
+def creature_selection(lst, func):
+    character = func(lst)
 
     if character == (len(lst) + 1):
         character = lst[random.randint(0, (len(lst) - 1))]
@@ -64,6 +71,8 @@ def creature_selection(lst):
         character = lst[character - 1]
     
     return character
+
+###########################################################################
 
 def print_round_choices():
     print("""
@@ -76,19 +85,13 @@ def print_round_choices():
     """)
 optionslist = ["Attacks", "Potions", "Skip Round"]
 
-def round_selection(lst, player):
+###########################################################################
+
+def round_selection(lst, player, func):
+    round_option = func(lst)
+
     while True:
-
-        try:
-            round_option = int(input("Enter number: "))
-        except:
-            print("\nPlease enter a valid number\n")
-            continue
-
-        if (round_option < 1) or (round_option > (len(lst) + 1)):
-            print("\nPlease enter a valid number\n")
-            continue
-        elif round_option == 2:
+        if round_option == 2:
             if player.potions == []:
                 print("\nNo more potions left. Pick another option.\n")
                 continue
@@ -96,19 +99,39 @@ def round_selection(lst, player):
                 break
         else:
             break
-
+    
     return round_option
 
-def move_selection(round_option, character):
+###########################################################################
+    
+
+def move_selection(round_option, character, func):
     if round_option == 1:
         print("Choose an option:\n\n1 - " + str(character.attacks[0]) + "\n2 - " + str(character.attacks[1]) + "\n3 - " + str(character.attacks[2]))
+        move_option = func(character.attacks)
+
+        while True:
+            if move_option == 1:
+                break # Add code for attack 1
+            elif move_option == 2:
+                break # Add Code for attack 2
+            elif move_option == 3:
+                break # Add Code for attack 2
+        
+        return "Move Selection function, if round option == 1" # Change output
 
     elif round_option == 2:
         print("Choose an option:\n\n")
+
         i = 0
         for potion in character.potions:
             print(str(i + 1) + " - " + str(potion))
             i += 1
-    
+        
+        move_option = func(character.potions)
+
+        return "Move Selection function, if round option == 2" # Change output
+        
     elif round_option == 3:
-        return round_option
+        move_option = round_option
+        return "Move Selection function, if round option == 3" # Change Output
