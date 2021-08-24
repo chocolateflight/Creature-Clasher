@@ -1,4 +1,5 @@
 import random
+from python_game_variables import Attacks, Potions
 
 ###########################################################################
 
@@ -28,6 +29,8 @@ def print_line():
 
 ###########################################################################
 
+# Pick Creature Selection
+
 def print_pick_creature():
     print("""
 Please pick a creature!
@@ -42,6 +45,23 @@ Please pick a creature!
 """)
 
 ###########################################################################
+
+# Choices for each round
+
+def print_round_choices():
+    print("""
+    Choose an option:
+
+    1 - Attacks
+    2 - Potions
+    3 - Skip Round
+    
+    """)
+optionslist = ["Attacks", "Potions", "Skip Round"]
+
+###########################################################################
+
+# Checks if user input is valid
 
 def user_input(lst):
     while True:
@@ -62,8 +82,10 @@ def user_input(lst):
 
 ###########################################################################
 
-def creature_selection(lst, func):
-    character = func(lst)
+# Creature Selection
+
+def creature_selection(lst, user_input):
+    character = user_input(lst)
 
     if character == (len(lst) + 1):
         character = lst[random.randint(0, (len(lst) - 1))]
@@ -74,64 +96,94 @@ def creature_selection(lst, func):
 
 ###########################################################################
 
-def print_round_choices():
-    print("""
-    Choose an option:
+# Select an option from the round choices
 
-    1 - Attacks
-    2 - Potions
-    3 - Skip Round
-    
-    """)
-optionslist = ["Attacks", "Potions", "Skip Round"]
-
-###########################################################################
-
-def round_selection(lst, player, func):
-    round_option = func(lst)
+def round_selection(options_lst, player, user_input, potionslist):
+    available_attacks = []
 
     while True:
+        round_option = user_input(options_lst)
+
+        if round_option == 1:
+
+            for attack in player.attacks:
+                if abs(attack.stamina_effect) <= player.stamina:
+                    available_attacks.append(attack)
+
+            if available_attacks != []:
+                return available_attacks
+            elif (available_attacks == []) and (potionslist[0] in player.potions):
+                print("You need to drink a stamina potion if you want to attack your opponent.")
+                continue
+
+            elif (available_attacks == []) and not (potionslist[0] in player.potions):
+                return 12 # No attack can be used, no potion is available. Player looses. 
+
         if round_option == 2:
             if player.potions == []:
                 print("\nNo more potions left. Pick another option.\n")
                 continue
             else:
-                break
-        else:
-            break
-    
-    return round_option
+                return player.potions
+        
+        if round_option == 3:
+            return 11 # Skip Round
 
 ###########################################################################
+
+# Select a move after the round choice
+
+def attack_move(player, opponent, attack):
+    print(str(player) + " uses " + str(player.attacks[attack]) + " against " + str(opponent) + "!" )
+    chosen_attack = player.attacks[attack - 1]
+    attack_health_effect = chosen_attack.health_effect
+    attack_stamina_effect = chosen_attack.stamina_effect
+    opponent.health -= attack_health_effect
+    player.stamina -= attack_stamina_effect
     
 
-def move_selection(round_option, character, func):
-    if round_option == 1:
-        print("Choose an option:\n\n1 - " + str(character.attacks[0]) + "\n2 - " + str(character.attacks[1]) + "\n3 - " + str(character.attacks[2]))
-        move_option = func(character.attacks)
+def move_selection(round_option, player, opponent, user_input, attack_move):
 
-        while True:
-            if move_option == 1:
-                break # Add code for attack 1
-            elif move_option == 2:
-                break # Add Code for attack 2
-            elif move_option == 3:
-                break # Add Code for attack 2
+    if type(round_option) is list:
+
+        if isinstance(round_option[0], Attacks):
+
+            print("Choose an option:\n\n")
+            i = 0
+            for attack in round_option:
+                print(str(i + 1) + " - " + str(attack))
+                i += 1
+            print("\n")
+
+            attack = user_input(round_option)
+
+            if attack == 1:
+                pass # Add code for attack 1
+            elif attack == 2:
+                pass # Add Code for attack 2
+            elif attack == 3:
+                pass # Add Code for attack 3
+            
+            return "Move Selection function, if round option == 1" # Change output
+
+        elif isinstance(round_option[0, Potions]):
+            print("Choose an option:\n\n")
+
+            i = 0
+            for potion in player.potions:
+                print(str(i + 1) + " - " + str(potion))
+                i += 1
+            
+            potion = user_input(player.potions)
+
+            if potion == 1:
+                pass # Add code for potion 1
+            elif potion == 2:
+                pass # Add code for potion 2
+            elif potion == 3:
+                pass # Add code for potion 3
+
+            return "Move Selection function, if round option == 2" # Change output
         
-        return "Move Selection function, if round option == 1" # Change output
-
-    elif round_option == 2:
-        print("Choose an option:\n\n")
-
-        i = 0
-        for potion in character.potions:
-            print(str(i + 1) + " - " + str(potion))
-            i += 1
-        
-        move_option = func(character.potions)
-
-        return "Move Selection function, if round option == 2" # Change output
-        
-    elif round_option == 3:
-        move_option = round_option
+    elif round_option == 11:
         return "Move Selection function, if round option == 3" # Change Output
