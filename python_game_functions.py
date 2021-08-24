@@ -96,94 +96,24 @@ def creature_selection(lst, user_input):
 
 ###########################################################################
 
-# Select an option from the round choices
-
-def round_selection(options_lst, player, user_input, potionslist):
-    available_attacks = []
-
-    while True:
-        round_option = user_input(options_lst)
-
-        if round_option == 1:
-
-            for attack in player.attacks:
-                if abs(attack.stamina_effect) <= player.stamina:
-                    available_attacks.append(attack)
-
-            if available_attacks != []:
-                return available_attacks
-            elif (available_attacks == []) and (potionslist[0] in player.potions):
-                print("You need to drink a stamina potion if you want to attack your opponent.")
-                continue
-
-            elif (available_attacks == []) and not (potionslist[0] in player.potions):
-                return 12 # No attack can be used, no potion is available. Player looses. 
-
-        if round_option == 2:
-            if player.potions == []:
-                print("\nNo more potions left. Pick another option.\n")
-                continue
-            else:
-                return player.potions
-        
-        if round_option == 3:
-            return 11 # Skip Round
-
-###########################################################################
-
 # Select a move after the round choice
 
-def attack_move(player, opponent, attack):
-    print(str(player) + " uses " + str(player.attacks[attack]) + " against " + str(opponent) + "!" )
-    chosen_attack = player.attacks[attack - 1]
-    attack_health_effect = chosen_attack.health_effect
-    attack_stamina_effect = chosen_attack.stamina_effect
-    opponent.health -= attack_health_effect
-    player.stamina -= attack_stamina_effect
+def attack_move(player, opponent, round_option, attack_number):
+
+    attack = round_option[attack_number - 1]
+    print(str(player) + " (player) uses " + str(attack) + " against " + str(opponent) + ".")
+    health_effect_attack = abs(attack.health_effect)
+    stamina_effect_attack = abs(attack.stamina_effect)
     
+    if opponent.armour > 0:
+        if opponent.armour - health_effect_attack < 0:
+            opponent.health -= abs(opponent.armour - health_effect_attack)
+            opponent.armour = 0
+        elif opponent.armour - health_effect_attack >= 0:
+            opponent.armour -= health_effect_attack
+    elif opponent.armour <= 0:
+        opponent.health -= health_effect_attack
+    
+    player.stamina -= stamina_effect_attack
 
-def move_selection(round_option, player, opponent, user_input, attack_move):
-
-    if type(round_option) is list:
-
-        if isinstance(round_option[0], Attacks):
-
-            print("Choose an option:\n\n")
-            i = 0
-            for attack in round_option:
-                print(str(i + 1) + " - " + str(attack))
-                i += 1
-            print("\n")
-
-            attack = user_input(round_option)
-
-            if attack == 1:
-                pass # Add code for attack 1
-            elif attack == 2:
-                pass # Add Code for attack 2
-            elif attack == 3:
-                pass # Add Code for attack 3
-            
-            return "Move Selection function, if round option == 1" # Change output
-
-        elif isinstance(round_option[0, Potions]):
-            print("Choose an option:\n\n")
-
-            i = 0
-            for potion in player.potions:
-                print(str(i + 1) + " - " + str(potion))
-                i += 1
-            
-            potion = user_input(player.potions)
-
-            if potion == 1:
-                pass # Add code for potion 1
-            elif potion == 2:
-                pass # Add code for potion 2
-            elif potion == 3:
-                pass # Add code for potion 3
-
-            return "Move Selection function, if round option == 2" # Change output
-        
-    elif round_option == 11:
-        return "Move Selection function, if round option == 3" # Change Output
+    return player.stamina, opponent.health, opponent.armour
