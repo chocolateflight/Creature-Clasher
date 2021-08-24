@@ -2,6 +2,7 @@
 
 from python_game_variables import creaturelist, potionslist
 import python_game_functions
+import random
 
  
 python_game_functions.print_logo()
@@ -29,7 +30,7 @@ while True:
 
     lostcode = 0
     wincode = 0
-    while lostcode != 808 and wincode != 101: # While Loop for player's turn
+    while lostcode != 808 and wincode != 101: # While Loop for game round
 
         python_game_functions.print_line()
         print("It's your turn!\n")
@@ -59,27 +60,16 @@ while True:
                     attack_number = python_game_functions.user_input(available_attacks)
                     python_game_functions.print_line()
 
-                    if attack_number == 1:
-                        output = python_game_functions.attack_move(player, opponent, available_attacks, attack_number)
-                        player.stamina = output[0]
-                        opponent.health = output[1]
-                        opponent.armour = output[2]
-                        break
-                    elif attack_number == 2:
-                        output = python_game_functions.attack_move(player, opponent, available_attacks, attack_number)
-                        player.stamina = output[0]
-                        opponent.health = output[1]
-                        opponent.armour = output[2]
-                        break
-                    elif attack_number == 3:
-                        output = python_game_functions.attack_move(player, opponent, available_attacks, attack_number)
-                        player.stamina = output[0]
-                        opponent.health = output[1]
-                        opponent.armour = output[2]
-                        break
+                    output = python_game_functions.attack_move(player, opponent, available_attacks, attack_number)
+                    player.stamina = output[0]
+                    opponent.health = output[1]
+                    opponent.armour = output[2]
+                    break
+
                 elif (available_attacks == []) and (potionslist[0] in player.potions):
                     print("You need to drink a stamina potion if you want to attack your opponent.")
                     continue
+
                 elif (available_attacks == []) and not (potionslist[0] in player.potions):
                     lostcode = 808
                     break
@@ -100,21 +90,11 @@ while True:
                     potion_number = python_game_functions.user_input(player.potions)
                     python_game_functions.print_line()
 
-                    if potion_number == 1:
-                        output = python_game_functions.potion_move(player, player.potions, potion_number)
-                        player.health = output[0]
-                        player.stamina = output[1]
-                        break
-                    if potion_number == 2:
-                        output = python_game_functions.potion_move(player, player.potions, potion_number)
-                        player.health = output[0]
-                        player.stamina = output[1]
-                        break
-                    if potion_number == 3:
-                        output = python_game_functions.potion_move(player, player.potions, potion_number)
-                        player.health = output[0]
-                        player.stamina = output[1]
-                        break
+                    output = python_game_functions.potion_move(player, player.potions, potion_number)
+                    player.health = output[0]
+                    player.stamina = output[1]
+                    player.potions.remove(output[2])
+                    break
             
             if round_option == 3:
                 print("Are you sure that you want to skip your turn?\n\n1 - Yes\n2 - No\n")
@@ -127,8 +107,51 @@ while True:
                 if choice == 2:
                     print("Pick again:")
                     continue
-        break
-    ## ADD CODE FOR OPPONENTS TURN ##
+        
+        print("\n")
+        print(player.summary_player())
+        print(opponent.summary_opponent())
+        python_game_functions.print_line()    
+
+    
+        # Add code to check if opponent health is below 0.
+
+        # Opponent Turn
+        print("It is now your opponents turn!\n")
+        if opponent.health <= 40: # Opponent drinks health potion if health is low
+            if potionslist[1] in opponent.potions:
+                opponent.health += potionslist[1].health_effect
+                opponent.potions.remove(potionslist[1])
+                print("Your opponent drank a healthpotion.")
+                continue
+            else:
+                pass
+        else:
+            available_attacks_opo = []
+            for attack in opponent.attacks:
+                if abs(attack.stamina_effect) <= opponent.stamina:
+                    available_attacks_opo.append(attack)
+
+            if available_attacks_opo != []:
+
+                opponent_attack_number = int(random.randint(0, (len(available_attacks_opo) - 1)))
+
+                output = python_game_functions.attack_move(opponent, player, available_attacks_opo, opponent_attack_number)
+                opponent.stamina = output[0]
+                player.health = output[1]
+                player.armour = output[2]
+                continue
+                    
+            elif (available_attacks_opo == []) and potionslist[0] in opponent.potions:
+                opponent.stamina += potionslist[0].stamina_effect
+                opponent.potions.remove(potionslist[0])
+                print("Your opponent drank a stamina potion.")
+                continue # Opponent drinks Stamina potion when necessary
+
+            elif (available_attacks_opo == []) and not (potionslist[0] in opponent.potions):
+                wincode = 101
+                break # Opponent looses
+            
     break
 
 print("####")
