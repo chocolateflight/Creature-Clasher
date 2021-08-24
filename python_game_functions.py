@@ -96,11 +96,11 @@ def creature_selection(lst, user_input):
 
 ###########################################################################
 
-# Select a move after the round choice
+# Attack Round
 
-def attack_move(player, opponent, round_option, attack_number):
+def attack_move(player, opponent, available_attacks, attack_number):
 
-    attack = round_option[attack_number - 1]
+    attack = available_attacks[attack_number - 1]
     print(str(player) + " (player) uses " + str(attack) + " against " + str(opponent) + ".")
     health_effect_attack = abs(attack.health_effect)
     stamina_effect_attack = abs(attack.stamina_effect)
@@ -117,3 +117,17 @@ def attack_move(player, opponent, round_option, attack_number):
     player.stamina -= stamina_effect_attack
 
     return player.stamina, opponent.health, opponent.armour
+
+###########################################################################
+
+# Potion Round
+
+def potion_move(player, available_potions, potion_number):
+    potion = available_potions[potion_number - 1]
+    health_effect_potion = abs(potion.health_effect)
+    stamina_effect_potion = abs(potion.stamina_effect)
+
+    player.health += health_effect_potion
+    player.stamina += stamina_effect_potion
+
+    return player.health, player.stamina

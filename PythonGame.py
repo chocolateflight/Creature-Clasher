@@ -20,6 +20,12 @@ while True:
     opponent = python_game_functions.creature_selection(creaturelist, python_game_functions.user_input) # Allows user to pick an opponent creature
     print("\nYour opponent is " + str(opponent) + ". Good luck!\n")
 
+    # python_game_functions.print_line
+    # print("--- Ignore this part ---")
+    # print(vars(player))
+    # print(vars(opponent))
+    # print("--- Ignore this part ---")
+    # python_game_functions.print_line
 
     lostcode = 0
     wincode = 0
@@ -89,17 +95,23 @@ while True:
                         i += 1
                     print("\n")
 
-                    potion = python_game_functions.user_input(player.potions)
+                    potion_number = python_game_functions.user_input(player.potions)
 
-                    if potion == 1:
-                        print("Potion 1")
-                        break # Add code for potion 1
-                    if potion == 2:
-                        print("Potion 2")
-                        break # Add code for potion 2
-                    if potion == 3:
-                        print("Potion 3")
-                        break # Add code for potion 3
+                    if potion_number == 1:
+                        output = python_game_functions.potion_move(player, player.potions, potion_number)
+                        player.health = output[0]
+                        player.stamina = output[1]
+                        break
+                    if potion_number == 2:
+                        output = python_game_functions.potion_move(player, player.potions, potion_number)
+                        player.health = output[0]
+                        player.stamina = output[1]
+                        break
+                    if potion_number == 3:
+                        output = python_game_functions.potion_move(player, player.potions, potion_number)
+                        player.health = output[0]
+                        player.stamina = output[1]
+                        break
             
             if round_option == 3:
                 print("Skip turn")
