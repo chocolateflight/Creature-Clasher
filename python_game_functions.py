@@ -103,7 +103,7 @@ def creature_selection(lst, user_input):
 def attack_move(player, opponent, available_attacks, attack_number):
 
     attack = available_attacks[attack_number - 1]
-    print(str(player) + " (player) uses " + str(attack) + " against " + str(opponent) + ".")
+    print(str(player) + " uses " + str(attack) + " against " + str(opponent) + ".")
     health_effect_attack = abs(attack.health_effect)
     stamina_effect_attack = abs(attack.stamina_effect)
     
@@ -132,4 +132,6 @@ def potion_move(player, available_potions, potion_number):
     player.health += health_effect_potion
     player.stamina += stamina_effect_potion
 
-    return player.health, player.stamina
+    return player.health, player.stamina, potion
+
+###########################################################################
