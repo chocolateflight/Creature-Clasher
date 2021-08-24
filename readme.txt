@@ -1,0 +1,12 @@
+  _____                _                    _____ _           _     
+/  __ \              | |                  /  __ \ |         | |    
+| /  \/_ __ ___  __ _| |_ _   _ _ __ ___  | /  \/ | __ _ ___| |__  
+| |   | '__/ _ \/ _` | __| | | | '__/ _ \ | |   | |/ _` / __| '_ \ 
+| \__/\ | |  __/ (_| | |_| |_| | | |  __/ | \__/\ | (_| \__ \ | | |
+ \____/_|  \___|\__,_|\__|\__,_|_|  \___|  \____/_|\__,_|___/_| |_|
+        
+ 
+ --- THIS PROJECT IS WORK IN PROGRESS ---
+ 
+ My first Python based terminal game. This is a training project for me to use the Python knowledge I have aquired so far.
+
