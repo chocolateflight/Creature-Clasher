@@ -62,6 +62,8 @@ fingerflip = Attacks("Fingerflip", -15, -15)
 staminapotion = Potions("Stamina Potion", 0, +30)
 healthpotion = Potions("Health Potion", +20, 0)
 
+potionslist = [staminapotion, healthpotion]
+
 # Creatures #
 
 frostboy = Creature("Frostboy", 80, 100, 45, [frostbite, winterstorm, snowball], [staminapotion, staminapotion])
