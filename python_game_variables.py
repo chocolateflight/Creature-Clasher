@@ -59,8 +59,8 @@ fingerflip = Attacks("Fingerflip", -15, -15)
 
 # Potions #
 
-staminapotion = Potions("Stamina Potion", 0, +30)
-healthpotion = Potions("Health Potion", +20, 0)
+staminapotion = Potions("Stamina Potion", 0, +60)
+healthpotion = Potions("Health Potion", +50, 0)
 
 potionslist = [staminapotion, healthpotion]
 
