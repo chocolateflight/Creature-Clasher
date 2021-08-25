@@ -121,7 +121,6 @@ while True:
             break
 
         print("\n")
-        print(player.summary_player())
         print(opponent.summary_opponent())
         python_game_functions.print_line()    
 
@@ -162,6 +161,7 @@ while True:
             break # Opponent looses
     
     if lostcode == 808:
+        python_game_functions.print_line()
         print("You lost! Your opponent " + str(opponent) + " won this battle. Would you like to play another round?")
         print("\n1 - Yes\n2 - No\n")
         available_choices = ["Yes", "No"]
@@ -175,6 +175,7 @@ while True:
             break
     
     elif wincode == 101:
+        python_game_functions.print_line()
         print("Congratulations! You won. Your opponent was destroyed. Would you like to play another round?")
         print("\n1 - Yes\n2 - No\n")
         available_choices = ["Yes", "No"]
