@@ -10,3 +10,5 @@
  
  My first Python based terminal game. This is a training project for me to use the Python knowledge I have aquired so far.
 
+ Test.
+
