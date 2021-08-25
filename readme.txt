@@ -4,15 +4,16 @@
 | |   | '__/ _ \/ _` | __| | | | '__/ _ \ | |   | |/ _` / __| '_ \ / _ \ '__|
 | \__/\ | |  __/ (_| | |_| |_| | | |  __/ | \__/\ | (_| \__ \ | | |  __/ |   
  \____/_|  \___|\__,_|\__|\__,_|_|  \___|  \____/_|\__,_|___/_| |_|\___|_| 
-        
+
+------------- WORK IN PROGRESS -------------
+ 
+
  
  --- WELCOME ---
  
  Welcome to Creature Clasher! 
 
- For the past few weeks, I've been taking a Codecademy course to learn some basic programming skills in Python. I now wanted
- to create a program with some of the things I have learned so far to get a better understanding of them. This is how Creature Clasher
- was created.
+ For the past few weeks, I've been taking a Codecademy course to learn some basic programming skills in Python. I now wanted to create a program with some of the things I have learned so far to get a better understanding of them. This is how Creature Clasher was created.
 
  Thank you for reading this file!
  Marc 
@@ -21,12 +22,9 @@
  --- WHAT IS CREATURE CLASHER? ---
  Creature Clasher is a simple Python Terminal Game. 
 
- There are five creatues: Frostboy, Vampthing, Cryptbeast, Glowtree and Slagtooth. Each of these creatures has the ability to use three
- unique attacks. They wear an armour that protects them from health damage and they have a health and stamina level. They also have an
- inventory of potions they can use to increase their health and stamina level. 
+ There are five creatues: Frostboy, Vampthing, Cryptbeast, Glowtree and Slagtooth. Each of these creatures has the ability to use three unique attacks. They wear an armour that protects them from health damage and they have a health and stamina level. They also have an inventory of potions they can use to increase their health and stamina level. 
 
- The first thing you to is to pick a creature for yourself. You can pick one from the list or let the program decide for you. Then you can
- pick an opponent. Your creature will fight against your opponents creature. 
+ The first thing you to is to pick a creature for yourself. You can pick one from the list or let the program decide for you. Then you can pick an opponent. Your creature will fight against your opponents creature. 
 
  --- HOW DOES IT WORK? --
 
@@ -53,8 +51,7 @@
  - You loose, if your health goes at or below 0 before your opponent's, or if you no longer have any stamina or staminapotions to attack. 
 
  --- Legal --
- This program is not supposed to be sold or advertised. This program is not a commercial product. This program was created solely as a training exercise. 
- Any similarities of names to other programs or real persons are purely coincidental.
+ This program is not supposed to be sold or advertised. This program is not a commercial product. This program was created solely as a training exercise. Any similarities of names to other programs or real persons are purely coincidental.
 
 
 
