@@ -21,13 +21,6 @@ while True:
     opponent = creatureclasher_functions.creature_selection(creaturelist, creatureclasher_functions.user_input) # Allows user to pick an opponent creature
     print("\nYour opponent is " + str(opponent) + ". Good luck!")
 
-    # creatureclasher_functions.print_line
-    # print("--- Ignore this part ---")
-    # print(vars(player))
-    # print(vars(opponent))
-    # print("--- Ignore this part ---")
-    # creatureclasher_functions.print_line
-
     lostcode = 0
     wincode = 0
     while lostcode != 808 and wincode != 101: # While Loop for game round
