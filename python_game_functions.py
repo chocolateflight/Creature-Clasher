@@ -1,5 +1,4 @@
 import random
-from python_game_variables import Attacks, Potions
 
 ###########################################################################
 
