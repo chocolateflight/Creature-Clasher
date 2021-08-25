@@ -6,7 +6,7 @@ import random
 
  
 creatureclash_functions.print_logo()
-print("Welcome to Creature Clash!")
+print("Welcome to Creature Clasher!")
 
 while True:
 
@@ -189,8 +189,13 @@ while True:
             break       
     break
 
-creatureclash_functions.print_line()
-print("Thank you for playing Creature Clash!")
-creatureclash_functions.print_line()
-creatureclash_functions.print_logo()
-print("A training project by Marc Hostettler")
+while True:
+    creatureclash_functions.print_line()
+    print("Thank you for playing Creature Clasher!\n")
+    creatureclash_functions.print_logo()
+    print("\nA training project by Marc Hostettler")
+    creatureclash_functions.print_line()
+    print("Enter \"1\" to end programm")
+    available_choices = []
+    choice = creatureclash_functions.user_input(available_choices)
+    break
