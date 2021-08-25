@@ -31,10 +31,15 @@ while True:
     lostcode = 0
     wincode = 0
     while lostcode != 808 and wincode != 101: # While Loop for game round
+        
+        if player.health <= 0:
+            lostcode = 808
+            break
 
         python_game_functions.print_line()
         print("It's your turn!\n")
-        print(player.summary_player() + "\n")
+        print(player.summary_player())
+        print(opponent.summary_opponent() + "\n")
 
         available_attacks = []
 
@@ -53,7 +58,7 @@ while True:
                     print("Choose an option:\n\n")
                     i = 0
                     for attack in available_attacks:
-                        print(str(i + 1) + " - " + str(attack))
+                        print(str(i + 1) + " - " + str(attack) + " (Effect on opponent: " + str(attack.health_effect) + " health, Effect on you: " + str(attack.stamina_effect) + " stamina.)")
                         i += 1
                     print("\n")
                 
@@ -83,7 +88,7 @@ while True:
 
                     i = 0
                     for potion in player.potions:
-                        print(str(i + 1) + " - " + str(potion))
+                        print(str(i + 1) + " - " + str(potion) + " (Effect: + " + str(abs(potion.health_effect)) + " health, +" + str(abs(potion.stamina_effect)) + " stamina.)")
                         i += 1
                     print("\n")
 
@@ -108,13 +113,17 @@ while True:
                     print("Pick again:")
                     continue
         
+        if lostcode == 808:
+            break
+
+        if opponent.health <= 0:
+            wincode = 101
+            break
+
         print("\n")
         print(player.summary_player())
         print(opponent.summary_opponent())
         python_game_functions.print_line()    
-
-    
-        # Add code to check if opponent health is below 0.
 
         # Opponent Turn
         print("It is now your opponents turn!\n")
@@ -126,35 +135,61 @@ while True:
                 continue
             else:
                 pass
-        else:
-            available_attacks_opo = []
-            for attack in opponent.attacks:
-                if abs(attack.stamina_effect) <= opponent.stamina:
-                    available_attacks_opo.append(attack)
 
-            if available_attacks_opo != []:
+        available_attacks_opo = []
+        for attack in opponent.attacks:
+            if abs(attack.stamina_effect) <= opponent.stamina:
+                available_attacks_opo.append(attack)
 
-                opponent_attack_number = int(random.randint(0, (len(available_attacks_opo) - 1)))
+        if available_attacks_opo != []:
 
-                output = python_game_functions.attack_move(opponent, player, available_attacks_opo, opponent_attack_number)
-                opponent.stamina = output[0]
-                player.health = output[1]
-                player.armour = output[2]
-                continue
-                    
-            elif (available_attacks_opo == []) and potionslist[0] in opponent.potions:
-                opponent.stamina += potionslist[0].stamina_effect
-                opponent.potions.remove(potionslist[0])
-                print("Your opponent drank a stamina potion.")
-                continue # Opponent drinks Stamina potion when necessary
+            opponent_attack_number = int(random.randint(0, (len(available_attacks_opo) - 1)))
 
-            elif (available_attacks_opo == []) and not (potionslist[0] in opponent.potions):
-                wincode = 101
-                break # Opponent looses
-            
+            output = python_game_functions.attack_move(opponent, player, available_attacks_opo, opponent_attack_number)
+            opponent.stamina = output[0]
+            player.health = output[1]
+            player.armour = output[2]
+            continue
+                
+        elif (available_attacks_opo == []) and potionslist[0] in opponent.potions:
+            opponent.stamina += potionslist[0].stamina_effect
+            opponent.potions.remove(potionslist[0])
+            print("Your opponent drank a stamina potion.")
+            continue # Opponent drinks Stamina potion when necessary
+
+        elif (available_attacks_opo == []) and not (potionslist[0] in opponent.potions):
+            wincode = 101
+            break # Opponent looses
+    
+    if lostcode == 808:
+        print("You lost! Your opponent " + str(opponent) + " won this battle. Would you like to play another round?")
+        print("\n1 - Yes\n2 - No\n")
+        available_choices = ["Yes", "No"]
+        choice = python_game_functions.user_input(available_choices)
+        python_game_functions.print_line
+
+        if choice == 1:
+            continue
+
+        if choice == 2:
+            break
+    
+    elif wincode == 101:
+        print("Congratulations! You won. Your opponent was destroyed. Would you like to play another round?")
+        print("\n1 - Yes\n2 - No\n")
+        available_choices = ["Yes", "No"]
+        choice = python_game_functions.user_input(available_choices)
+        python_game_functions.print_line
+
+        if choice == 1:
+            continue
+
+        if choice == 2:
+            break       
     break
 
-print("####")
-print(vars(player))
-print(vars(opponent))
-print("####")
+python_game_functions.print_line()
+print("Thank you for playing Creature Clash!")
+python_game_functions.print_line()
+python_game_functions.print_logo()
+print("A training project by Marc Hostettler")
