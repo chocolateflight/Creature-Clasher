@@ -1,32 +1,32 @@
 # Hello World
 
-from python_game_variables import creaturelist, potionslist
-import python_game_functions
+from creatureclash_variables import creaturelist, potionslist
+import creatureclash_functions
 import random
 
  
-python_game_functions.print_logo()
+creatureclash_functions.print_logo()
 print("Welcome to Creature Clash!")
 
 while True:
 
-    python_game_functions.print_pick_creature() # Prints List of creatures
+    creatureclash_functions.print_pick_creature() # Prints List of creatures
 
-    player = python_game_functions.creature_selection(creaturelist, python_game_functions.user_input) # Allows user to pick a creature for themselves
+    player = creatureclash_functions.creature_selection(creaturelist, creatureclash_functions.user_input) # Allows user to pick a creature for themselves
 
-    python_game_functions.print_line()
+    creatureclash_functions.print_line()
     print("You choose " + str(player) + "! Now it's time to pick your opponent.")
-    python_game_functions.print_pick_creature()
+    creatureclash_functions.print_pick_creature()
 
-    opponent = python_game_functions.creature_selection(creaturelist, python_game_functions.user_input) # Allows user to pick an opponent creature
+    opponent = creatureclash_functions.creature_selection(creaturelist, creatureclash_functions.user_input) # Allows user to pick an opponent creature
     print("\nYour opponent is " + str(opponent) + ". Good luck!")
 
-    # python_game_functions.print_line
+    # creatureclash_functions.print_line
     # print("--- Ignore this part ---")
     # print(vars(player))
     # print(vars(opponent))
     # print("--- Ignore this part ---")
-    # python_game_functions.print_line
+    # creatureclash_functions.print_line
 
     lostcode = 0
     wincode = 0
@@ -36,7 +36,7 @@ while True:
             lostcode = 808
             break
 
-        python_game_functions.print_line()
+        creatureclash_functions.print_line()
         print("It's your turn!\n")
         print(player.summary_player())
         print(opponent.summary_opponent() + "\n")
@@ -44,9 +44,9 @@ while True:
         available_attacks = []
 
         while lostcode != 808 and wincode != 101: # While Loop for player's choices
-            python_game_functions.print_round_choices()
-            round_option = python_game_functions.user_input(python_game_functions.optionslist)
-            python_game_functions.print_line()
+            creatureclash_functions.print_round_choices()
+            round_option = creatureclash_functions.user_input(creatureclash_functions.optionslist)
+            creatureclash_functions.print_line()
 
             if round_option == 1:
 
@@ -62,10 +62,10 @@ while True:
                         i += 1
                     print("\n")
                 
-                    attack_number = python_game_functions.user_input(available_attacks)
-                    python_game_functions.print_line()
+                    attack_number = creatureclash_functions.user_input(available_attacks)
+                    creatureclash_functions.print_line()
 
-                    output = python_game_functions.attack_move(player, opponent, available_attacks, attack_number)
+                    output = creatureclash_functions.attack_move(player, opponent, available_attacks, attack_number)
                     player.stamina = output[0]
                     opponent.health = output[1]
                     opponent.armour = output[2]
@@ -92,10 +92,10 @@ while True:
                         i += 1
                     print("\n")
 
-                    potion_number = python_game_functions.user_input(player.potions)
-                    python_game_functions.print_line()
+                    potion_number = creatureclash_functions.user_input(player.potions)
+                    creatureclash_functions.print_line()
 
-                    output = python_game_functions.potion_move(player, player.potions, potion_number)
+                    output = creatureclash_functions.potion_move(player, player.potions, potion_number)
                     player.health = output[0]
                     player.stamina = output[1]
                     player.potions.remove(output[2])
@@ -104,8 +104,8 @@ while True:
             if round_option == 3:
                 print("Are you sure that you want to skip your turn?\n\n1 - Yes\n2 - No\n")
                 available_choices = ["Yes", "No"]
-                choice = python_game_functions.user_input(available_choices)
-                python_game_functions.print_line()
+                choice = creatureclash_functions.user_input(available_choices)
+                creatureclash_functions.print_line()
 
                 if choice == 1:
                     break
@@ -122,7 +122,7 @@ while True:
 
         print("\n")
         print(opponent.summary_opponent())
-        python_game_functions.print_line()    
+        creatureclash_functions.print_line()    
 
         # Opponent Turn
         print("It is now your opponents turn!\n")
@@ -144,7 +144,7 @@ while True:
 
             opponent_attack_number = int(random.randint(0, (len(available_attacks_opo) - 1)))
 
-            output = python_game_functions.attack_move(opponent, player, available_attacks_opo, opponent_attack_number)
+            output = creatureclash_functions.attack_move(opponent, player, available_attacks_opo, opponent_attack_number)
             opponent.stamina = output[0]
             player.health = output[1]
             player.armour = output[2]
@@ -161,12 +161,12 @@ while True:
             break # Opponent looses
     
     if lostcode == 808:
-        python_game_functions.print_line()
+        creatureclash_functions.print_line()
         print("You lost! Your opponent " + str(opponent) + " won this battle. Would you like to play another round?")
         print("\n1 - Yes\n2 - No\n")
         available_choices = ["Yes", "No"]
-        choice = python_game_functions.user_input(available_choices)
-        python_game_functions.print_line
+        choice = creatureclash_functions.user_input(available_choices)
+        creatureclash_functions.print_line
 
         if choice == 1:
             continue
@@ -175,12 +175,12 @@ while True:
             break
     
     elif wincode == 101:
-        python_game_functions.print_line()
+        creatureclash_functions.print_line()
         print("Congratulations! You won. Your opponent was destroyed. Would you like to play another round?")
         print("\n1 - Yes\n2 - No\n")
         available_choices = ["Yes", "No"]
-        choice = python_game_functions.user_input(available_choices)
-        python_game_functions.print_line
+        choice = creatureclash_functions.user_input(available_choices)
+        creatureclash_functions.print_line
 
         if choice == 1:
             continue
@@ -189,8 +189,8 @@ while True:
             break       
     break
 
-python_game_functions.print_line()
+creatureclash_functions.print_line()
 print("Thank you for playing Creature Clash!")
-python_game_functions.print_line()
-python_game_functions.print_logo()
+creatureclash_functions.print_line()
+creatureclash_functions.print_logo()
 print("A training project by Marc Hostettler")
