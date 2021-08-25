@@ -126,6 +126,7 @@ def attack_move(player, opponent, available_attacks, attack_number):
 
 def potion_move(player, available_potions, potion_number):
     potion = available_potions[potion_number - 1]
+    print(str(player) + " drinks a " + str(potion) + ".")
     health_effect_potion = abs(potion.health_effect)
     stamina_effect_potion = abs(potion.stamina_effect)
 
