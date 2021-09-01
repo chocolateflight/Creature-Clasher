@@ -17,6 +17,13 @@
 
  Thank you for reading this file!
  Marc 
+ 
+ --- HOW TO PLAY ---
+ This is a Python Terminal game, so you will need a Python interpreter to access it.
+ 
+ 1. Download all the files and save them in an empty folder
+ 2. Install Python
+ 2. Run the file "CreatureClasher.py" using a Python interpreter. 
 
 
  --- WHAT IS CREATURE CLASHER? ---
